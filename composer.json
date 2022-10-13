@@ -1,5 +1,5 @@
 {
-  "name": "digitall/epp",
+  "name": "magicsrl/epp",
   "description": "digitall-it-reg epp client",
   "require": {
     "twig/twig": "^2",
