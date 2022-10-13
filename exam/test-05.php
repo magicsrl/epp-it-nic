@@ -8,21 +8,33 @@ $cfg = Yaml::parseFile(__DIR__ . '/../exam.yaml');
 $dryrun = $cfg['dryrun'];
 
 $epp_a = new Epp('epp-a', $cfg['servers']['exam-a'], $dryrun);
-$epp_b = new Epp('epp-b', $cfg['servers']['exam-b'], $dryrun);
+// $epp_b = new Epp('epp-b', $cfg['servers']['exam-b'], $dryrun);
 
-echo 'Test 5 - Creation of three registrant contacts:';
+echo 'Test 2 - Authentication (by opening one or more simultaneous sessions):';
 
-$return = $epp_a->contactCreate($cfg["samplecontacts"]['AA10']);
+$return = $epp_a->login();
 if (!$dryrun && $return['status']['code'] != 1000) die('FAILED');
 echo "OK-";
 
+echo 'Test 5 - Creation of three registrant contacts:';
+// print_r($cfg["samplecontacts"]['AA10']);
+// $return = $epp_a->contactCreate($cfg["samplecontacts"]['AA10']);
+// if (!$dryrun && $return['status']['code'] != 1000) die('FAILED');
+// echo "OK-";
+
 $return = $epp_a->contactCreate($cfg["samplecontacts"]['BB10']);
-if (!$dryrun && $return['status']['code'] != 1000) die('FAILED');
+if (!$dryrun && $return['status']['code'] != 1000) {
+    $epp_a->logout();
+    die('FAILED');
+}
 echo "OK-";
 
 $return = $epp_a->contactCreate($cfg["samplecontacts"]['IL10']);
-if (!$dryrun && $return['status']['code'] != 1000) die('FAILED');
+if (!$dryrun && $return['status']['code'] != 1000) {
+    $epp_a->logout();
+    die('FAILED');
+}
 echo "OK\n";
 
 unset($epp_a);
-unset($epp_b);
+// unset($epp_b);

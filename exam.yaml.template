@@ -1,16 +1,16 @@
-dryrun: true
+dryrun: false
 servers:
   exam-a:
-    username: USERNAME
-    password: PASSWORD
-    uri: "https://epp-acc1.nic.it"
+    username: USER1
+    password: PASSWORD1
+    uri: "https://epp.pubtest.nic.it"
   exam-b:
-    username: USERNAME2
+    username: USER2
     password: PASSWORD2
-    uri: "https://epp-acc1.nic.it"
+    uri: "https://epp.pubtest.nic.it"
 samplecontacts:
   AA10:
-    handle: "AA10"
+    handle: "REG-IT-AA10"
     name: Franco Franchi
     org: Ente Pubblico AX
     addr:
@@ -29,7 +29,7 @@ samplecontacts:
       entitytype: 5
       regcode: "02118312008"
   BB10:
-    handle: "BB10"
+    handle: "REG-IT-BB10"
     name: Sandro Rossi
     org: Gruppo TNT S.p.A.
     addr:
@@ -48,7 +48,7 @@ samplecontacts:
       entitytype: 2
       regcode: "12345678910"
   IL10:
-    handle: "IL10"
+    handle: "REG-IT-IL10"
     name: Ida Lenzi
     org: Ida Lenzi
     addr:
@@ -67,7 +67,7 @@ samplecontacts:
       entitytype: 1
       regcode: "LNZDIA56R41F839L"
   CC01:
-    handle: "CC01"
+    handle: "REG-IT-CC01"
     name: Carlo Conta
     org: Unodue srl
     addr:
@@ -82,7 +82,7 @@ samplecontacts:
     pw: "OneTwoThree"
     consentforpublishing: true
   DD01:
-    handle: "DD01"
+    handle: "REG-IT-DD01"
     name: Donald Duck
     org: Warehouse Ltd
     addr:
@@ -98,7 +98,7 @@ samplecontacts:
     consentforpublishing: true
 sampledomains:
   test:
-    name: 'test.it'
+    name: "test.it"
     period: 1
     ns:
       primary:
@@ -115,7 +115,7 @@ sampledomains:
       tech: "CC01"
     authInfo: "WWW-test-it"
   test1:
-    name: 'test-1.it'
+    name: "test-1.it"
     period: 1
     ns:
       primary:

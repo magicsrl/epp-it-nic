@@ -1,10 +1,10 @@
 {
-  "name": "magicsrl/epp",
-  "description": "digitall-it-reg epp client",
+  "name": "magicsrl/epp-nic-it",
+  "description": "regsm-reg epp client",
   "require": {
     "twig/twig": "^2",
-    "monolog/monolog": "^2.2",
-    "guzzlehttp/guzzle": "~7.0",
+    "monolog/monolog": "^1.24",
+    "guzzlehttp/guzzle": "~6.0",
     "symfony/yaml": "^4.3",
     "plesk/api-php-lib": "^1.0"
   },
@@ -28,13 +28,7 @@
   },
   "autoload": {
     "psr-4": {
-      "digitall\\": "digitall/"
+      "magicsrl\\": "magicsrl/"
     }
-  },
-  "authors": [
-    {
-      "name": "Giancarlo Di Massa",
-      "email": "giancarlo@digitall.it"
-    }
-  ]
+  }
 }
