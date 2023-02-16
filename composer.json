@@ -3,7 +3,7 @@
   "description": "regsm-reg epp client",
   "require": {
     "twig/twig": "^2",
-    "monolog/monolog": "^1.24",
+    "monolog/monolog": "^2.2",
     "guzzlehttp/guzzle": "~6.0",
     "symfony/yaml": "^4.3",
     "plesk/api-php-lib": "^1.0"
