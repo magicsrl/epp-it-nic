@@ -2,6 +2,7 @@
 
 namespace magicsrl;
 
+use Yii;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Cookie\FileCookieJar;
@@ -116,17 +117,17 @@ class Epp
         try {
             $this->log = new Logger('log-' . $name);
             //ErrorHandler::register($this->log);
-            $this->log->pushHandler(new StreamHandler(__DIR__ . '/logs/client/debug-' . $name . '.log', Logger::DEBUG));
-            $this->log->pushHandler(new StreamHandler(__DIR__ . '/logs/client/info-' . $name . '.log', Logger::INFO));
-            $this->log->pushHandler(new StreamHandler(__DIR__ . '/logs/client/warning-' . $name . '.log', Logger::WARNING));
-            $this->log->pushHandler(new StreamHandler(__DIR__ . '/logs/client/error-' . $name . '.log', Logger::ERROR));
+            $this->log->pushHandler(new StreamHandler(Yii::$app->basePath . '/runtime/logs/epp/client/debug-' . $name . '.log', Logger::DEBUG));
+            $this->log->pushHandler(new StreamHandler(Yii::$app->basePath . '/runtime/logs/epp/client/info-' . $name . '.log', Logger::INFO));
+            $this->log->pushHandler(new StreamHandler(Yii::$app->basePath . '/runtime/logs/epp/client/warning-' . $name . '.log', Logger::WARNING));
+            $this->log->pushHandler(new StreamHandler(Yii::$app->basePath . '/runtime/logs/epp/client/error-' . $name . '.log', Logger::ERROR));
         } catch (Exception $e) {
             die('Cannot instantiate logger:' . $e->getMessage());
         }
 
         $this->credentials = $credentials;
 
-        $this->cookiejar = new FileCookieJar(__DIR__ . '/cookies/cookiejar-' . $name . '.txt', true);
+        $this->cookiejar = new FileCookieJar(Yii::$app->basePath . '/data/epp/cookiejar-' . $name . '.txt', true);
 
         $this->client = new Client([
             'base_uri' => $this->credentials['uri'],
@@ -185,7 +186,7 @@ class Epp
     {
         if ($this->dryrun) {
             file_put_contents(
-                __dir__ . '/logs/epp/' . $this->name . '-dry-run.txt',
+                __dir__ . '/logs/' . $this->name . '-dry-run.txt',
                 $xml .
                     "\n---------------------------------------------------------------------------------------------\n",
                 FILE_APPEND
@@ -194,7 +195,7 @@ class Epp
             return new SimpleXMLElement('<xml></xml>');
         }
         $this->log->debug('Sending... ' . preg_replace('!\s+!', ' ', $xml));
-        file_put_contents(__dir__ . '/logs/epp/' . microtime(true) . '-send.xml', $xml);
+        file_put_contents(Yii::$app->basePath . '/runtime/logs/epp/' . date('Y-m-d H:i:s') . '-' . microtime(true) . '-send.xml', $xml);
         try {
             /* @var $client Client */
             if (isset($xml)) {
@@ -212,7 +213,7 @@ class Epp
             throw new RuntimeException('Error during transmission: ' . $e->getMessage());
         }
         $xml_received = $res->getBody();
-        file_put_contents(__dir__ . '/logs/epp/' . microtime(true) . '-received.xml', $xml_received);
+        file_put_contents(Yii::$app->basePath . '/runtime/logs/epp/' . date('Y-m-d H:i:s') . '-' . microtime(true) . '-received.xml', $xml_received);
         if ($debug) echo ($xml_received);
         $this->log->debug('Receiving... ' . preg_replace('!\s+!', ' ', $xml_received));
 
