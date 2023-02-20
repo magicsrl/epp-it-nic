@@ -340,12 +340,12 @@ class Epp
                 //throw new RuntimeException ($msg . ' - Wrong credentials.' . $reason);
                 break;
             case self::RESPONSE_FAILED_AUTH_ERROR:
-                $this->log->err($msg . ' - Wrong credentials.');
+                $this->log->error($msg . ' - Wrong credentials.');
                 $this->logReason($msg, $reason);
                 //throw new RuntimeException ($msg . ' - Wrong credentials.' . $reason);
                 break;
             case self::RESPONSE_FAILED_SESSION_LIMIT_EXCEEDED:
-                $this->log->err($msg . ' - Session limit exceeded, server closing connection. Try again later.');
+                $this->log->error($msg . ' - Session limit exceeded, server closing connection. Try again later.');
                 $this->logReason($msg, $reason);
                 //throw new RuntimeException ($msg . ' - Session limit exceeded, server closing connection. Try again later.' . $reason);
                 break;
@@ -356,35 +356,35 @@ class Epp
                 $this->log->info($msg . ' - Success.');
                 break;
             case self::RESPONSE_FAILED_COMMAND_USE_ERROR:
-                $this->log->err($msg . ' - Command use error.');
+                $this->log->error($msg . ' - Command use error.');
                 $this->logReason($msg, $reason);
                 //$this->logout(); // Prevent session limit
                 //throw new RuntimeException($msg . ' - Command use error.' . $reason);
                 break;
             case self::RESPONSE_FAILED_DATA_MANAGEMENT_POLICY_VIOLATION:
-                $this->log->err($msg . ' - Data management policy violation.');
+                $this->log->error($msg . ' - Data management policy violation.');
                 $this->logReason($msg, $reason);
                 break;
                 //$this->logout(); // Prevent session limit
                 //throw new RuntimeException($msg . ' - Data management policy violation.' . $reason);
             case self::RESPONSE_FAILED_SYNTAX_ERROR:
-                $this->log->err($msg . ' - Syntax error.');
+                $this->log->error($msg . ' - Syntax error.');
                 $this->logReason($msg, $reason);
                 break;
             case self::RESPONSE_COMPLETED_OBJECT_STATUS_PROHIBITS_OPERATIONS:
-                $this->log->err($msg . ' - Locked status.');
+                $this->log->error($msg . ' - Locked status.');
                 $this->logReason($msg, $reason);
                 //$this->logout(); // Prevent session limit
                 //throw new RuntimeException($msg . ' - Syntax error.' . $reason);
                 break;
             case self::RESPONSE_FAILED_PARAMETER_VALUE_RANGE:
-                $this->log->err($msg . ' - Syntax error.');
+                $this->log->error($msg . ' - Syntax error.');
                 $this->logReason($msg, $reason);
                 //$this->logout(); // Prevent session limit
                 //throw new RuntimeException($msg . ' - Syntax error.' . $reason);
                 break;
             case self::RESPONSE_FAILED_REQUIRED_PARAMETER_MISSING:
-                $this->log->err($msg . ' - Required parameter missing.');
+                $this->log->error($msg . ' - Required parameter missing.');
                 $this->logReason($msg, $reason);
                 //$this->logout(); // Prevent session limit
                 //throw new RuntimeException($msg . ' - Required parameter missing.' . $reason);
@@ -401,7 +401,7 @@ class Epp
                 $this->log->info('Command completed successfully; action pending');
                 break;
             default:
-                $this->log->err($msg . ' - Unhandled return code ' . $code);
+                $this->log->error($msg . ' - Unhandled return code ' . $code);
                 $this->logReason($msg, $reason);
                 //$this->logout(); // Prevent session limit
                 throw new RuntimeException($msg . ' - Unhandled return code ' . $code . '.' . $reason);
@@ -417,7 +417,7 @@ class Epp
      */
     private function logReason($msg, $reason)
     {
-        if ($reason !== null) $this->log->err($msg . ' - Reason:' . $reason);
+        if ($reason !== null) $this->log->error($msg . ' - Reason:' . $reason);
     }
 
     /**
