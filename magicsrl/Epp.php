@@ -58,6 +58,7 @@ class Epp
      * Result code of a response to a command to change a contact or domain that does not belong to the Registrar
      */
     const RESPONSE_COMPLETED_AUTH_ERROR = 2201;
+    const RESPONSE_CONTACT_ALREADY_EXISTS = 2202;
     /**
      * Result code of a response to a request to use a contact or domain that does not exist on the server
      */
@@ -399,6 +400,9 @@ class Epp
                 break;
             case self::RESPONSE_COMPLETED_ACTION_PENDING:
                 $this->log->info('Command completed successfully; action pending');
+                break;
+            case self::RESPONSE_CONTACT_ALREADY_EXISTS:
+                $this->log->info('Contact already exists');
                 break;
             default:
                 $this->log->error($msg . ' - Unhandled return code ' . $code);
