@@ -987,17 +987,27 @@ class Epp
         $msg = (string)$response->response->result->msg;
         $this->log->info('Received a response to domain transfer ' . $op . ': ' . $msg);
         $reason = ($this->nodeExists($response->response->result->extValue->reason)) ? $response->response->result->extValue->reason : null;
-        $this->handleReturnCode('domain transfer ' . $op, (int)$code, $reason);
 
-
-        return [
+        $return = [
             'status' =>
             [
                 'code' => $code,
                 'msg' => $msg,
-                'reason' => $reason
+                'reason' => $reason,
             ]
         ];
+
+        $ns = $response->getNamespaces(true);
+        $trStatus = $response->response->resData->children($ns['domain'])->trnData;
+        if ($op === 'query') {
+            $resData = $response->response;
+            $reason = $resData;
+            $return['status']['resData'] = $trStatus;
+            $return['status']['reason'] = $reason;
+        }
+
+        $this->handleReturnCode('domain transfer ' . $op, (int)$code, $reason);
+        return $return;
     }
 
 
