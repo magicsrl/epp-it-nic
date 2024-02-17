@@ -998,11 +998,13 @@ class Epp
         ];
 
         $ns = $response->getNamespaces(true);
-        $trStatus = $response->response->resData->children($ns['domain'])->trnData;
+        if (!empty($ns['domain'])) {
+            $trStatus = $response->response->resData->children($ns['domain'])->trnData;
+        }
         if ($op === 'query') {
             $resData = $response->response;
             $reason = $resData;
-            $return['status']['resData'] = $trStatus;
+            $return['status']['resData'] = $trStatus ?? [];
             $return['status']['reason'] = $reason;
         }
 
