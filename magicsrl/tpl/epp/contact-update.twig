@@ -48,6 +48,9 @@
                                 {% endif %}
                             </contact:postalInfo>
                         {% endif %}
+                        <contact:authInfo>
+                            <contact:pw>{% if contact.pw is defined %}{{ contact.pw }}{% endif %}</contact:pw>
+                        </contact:authInfo>
                     </contact:chg>
                 {% endif %}
                 {% if contact.rem is defined %}
@@ -55,6 +58,7 @@
                         <contact:status s="{{ contact.rem.status }}"/>
                     </contact:rem>
                 {% endif %}
+                <extcon:consentForPublishing>{{ contact.consentforpublishing }}</extcon:consentForPublishing>
             </contact:update>
         </update>
         <clTRID>{{ clTRID }}</clTRID>
